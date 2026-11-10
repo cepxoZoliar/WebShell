@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CommandRunner")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d622daf9c251599466a0cb0a567c89f76a91e196")]
 [assembly: System.Reflection.AssemblyProductAttribute("CommandRunner")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CommandRunner")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
