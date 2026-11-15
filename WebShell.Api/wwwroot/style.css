@@ -1,0 +1,73 @@
+body {
+    margin: 0;
+    background: #1e1e1e;
+    color: #d4d4d4;
+    font-family: -apple-system, "Segoe UI", sans-serif;
+}
+
+.terminal {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 24px;
+}
+
+h1 {
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.output {
+    background: #111;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 12px;
+    height: 60vh;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    word-break: break-word;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 14px;
+    line-height: 1.4;
+    margin: 0 0 12px;
+}
+
+.input-row {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.prompt {
+    font-family: Menlo, Consolas, monospace;
+    color: #4ec9b0;
+}
+
+#command-input {
+    flex: 1;
+    background: #111;
+    color: #d4d4d4;
+    border: 1px solid #333;
+    border-radius: 6px;
+    padding: 8px 10px;
+    font-family: Menlo, Consolas, monospace;
+    font-size: 14px;
+}
+
+#command-input:focus {
+    outline: none;
+    border-color: #4ec9b0;
+}
+
+button {
+    background: #4ec9b0;
+    color: #111;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 14px;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #6fdcc4;
+}
