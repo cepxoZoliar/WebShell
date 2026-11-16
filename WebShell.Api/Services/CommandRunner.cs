@@ -33,7 +33,8 @@ public class CommandRunner
         return sb.ToString();
     }
     
-    public async Task<CommandResult> RunAsync(string command)
+    public async Task<CommandResult> RunAsync(string command,
+        CancellationToken cancellationToken = default)
     {
         if (string.IsNullOrWhiteSpace(command))
         {
@@ -72,14 +73,18 @@ public class CommandRunner
 
         using (process)
         {
-            using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+            using var timeoutCts = new CancellationTokenSource(TimeSpan.FromSeconds(30));
+            using var linkedCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, 
+                timeoutCts.Token);
+            
             string output;
             string error;
+            
             try
             {
-                var outputTask = ReadLimitedAsync(process.StandardOutput, cts.Token);
-                var errorTask = ReadLimitedAsync(process.StandardError, cts.Token);
-                await process.WaitForExitAsync(cts.Token);
+                var outputTask = ReadLimitedAsync(process.StandardOutput, linkedCts.Token);
+                var errorTask = ReadLimitedAsync(process.StandardError, linkedCts.Token);
+                await process.WaitForExitAsync(linkedCts.Token);
 
                 output = await outputTask;
                 error = await errorTask;
@@ -87,6 +92,10 @@ public class CommandRunner
             catch (OperationCanceledException)
             {
                 process.Kill(entireProcessTree: true);
+                if (cancellationToken.IsCancellationRequested)
+                {
+                    return new CommandResult("", "Запрос отменен клиентом", -1);
+                }
                 return new CommandResult("", "Превышено время ожидания", -1);
             }
 

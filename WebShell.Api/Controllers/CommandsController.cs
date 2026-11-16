@@ -23,9 +23,10 @@ public class CommandsController : ControllerBase
     }
 
     [HttpPost]
-    public async Task<ActionResult<CommandResult>> Run(CommandRequest request)
+    public async Task<ActionResult<CommandResult>> Run(CommandRequest request, 
+        CancellationToken cancellationToken)
     {
-        var result = await _commandRunner.RunAsync(request.Command);
+        var result = await _commandRunner.RunAsync(request.Command,  cancellationToken);
 
         try
         {
