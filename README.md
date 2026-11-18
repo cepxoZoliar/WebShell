@@ -17,8 +17,8 @@ WebShell
   * На Mac с чипом Apple Silicon включи в Docker Desktop эмуляцию Rosetta. SQL Server работает через неё.
 
 - Запуск (БД и таблицы создаются автоматически при первом запуске)
-  I. Запуск SQL Server в контейнере:
+  1. Запуск SQL Server в контейнере:
      docker run -e 'ACCEPT_EULA=Y' -e 'MSSQL_SA_PASSWORD=Str0ngPassw0rd123' -p 127.0.0.1:1433:1433 --name webshell-sql --platform linux/amd64 -d       mcr.microsoft.com/mssql/server:2022-latest
      (Пароль относится только к локальной разработке. Он совпадает со строкой подключения в 'WebShell.Api/appsettings.json'.)
-  II. Запуск приложения на конфигурации 'WebShell.Api: http' (url: http://localhost:5032).
+  2. Запуск приложения на конфигурации 'WebShell.Api: http' (url: http://localhost:5032).
    
