@@ -43,14 +43,22 @@ public class CommandRunner
         
         var startInfo = new ProcessStartInfo
         {
-            FileName = "/bin/bash",
             RedirectStandardOutput = true,
             RedirectStandardError = true,
             UseShellExecute = false
         };
 
-        startInfo.ArgumentList.Add("-c");
-        startInfo.ArgumentList.Add(command);
+        if (OperatingSystem.IsWindows())
+        {
+            startInfo.FileName = "cmd.exe";
+            startInfo.Arguments = "/c " + command;
+        }
+        else
+        {
+            startInfo.FileName = "/bin/bash";
+            startInfo.ArgumentList.Add("-c");
+            startInfo.ArgumentList.Add(command);
+        }
 
         Process? process;
         try

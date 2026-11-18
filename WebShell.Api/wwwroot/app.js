@@ -6,7 +6,7 @@ let commandHistory = [];
 let historyIndex = 0;
 
 async function loadHistory() {
-    const response = await fetch("api/Commands/history");
+    const response = await fetch("/api/Commands/history");
     if (response.ok) {
         commandHistory = await response.json();
     }
@@ -28,13 +28,13 @@ async function runCommand() {
     });
     
     if (!response.ok) {
-        outputElement.textContent += "Ошибка запроса" + response.status + "\n";
+        outputElement.textContent += "Ошибка запроса " + response.status + "\n";
         return;
     }
     
     const result = await response.json();
     
-    outputElement.textContent = "$ " + command + "\n";
+    outputElement.textContent += "$ " + command + "\n";
     outputElement.textContent += result.output;
     outputElement.textContent += result.error;
     
